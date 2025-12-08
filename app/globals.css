@@ -2,21 +2,34 @@
 
 :root {
   --background: #ffffff;
+  --background-secondary: #f1f1f1;
   --foreground: #171717;
+  --foreground-secondary: #0000008a;
+  --stroke-light: #dbdbdb;
+  --action-buttons: #000000;
+  
+  /* other colors */
+  --for-error: #ff0000;
+  --for-warning: #ff8400;
+  --for-success: #00d86c;
+
+  /* theme colors */
+  --theme-primary: #8B27F5;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-stroke-light: var(--stroke-light);
+  --color-action-button: var(--action-buttons);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-for-error: var(--for-error);
+  --color-for-warning: var(--for-warning);
+  --color-for-success: var(--for-success);
+
+  --color-theme-primary: var(--theme-primary);
 }
 
 body {
