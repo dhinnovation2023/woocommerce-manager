@@ -14,8 +14,8 @@ export function handleFormInputOnChangeDynamicData<TSchema>(data: {
     if (data.event) {
         name = data.event.target.name;
         value = data.event.target.value;
-        if (!name || !value) {
-            throw new Error("Input > target > (name | value) is undefined");
+        if (!name) {
+            throw new Error("Input > target > (name) is undefined");
         }
     } else if (data.noEvent) {
         name = data.noEvent.name;

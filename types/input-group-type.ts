@@ -11,4 +11,5 @@ export type InputGroupType = {
     invalid?: boolean,
     isPassword?: boolean,
     type?: InputHTMLAttributes<HTMLInputElement>["type"],
+    required: boolean,
 }

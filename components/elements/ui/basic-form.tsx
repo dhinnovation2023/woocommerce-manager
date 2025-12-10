@@ -5,12 +5,13 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/in
 import { Label } from '@/components/ui/label'
 import { InputGroupType } from '@/types/input-group-type'
 import { RiEyeCloseLine, RiEyeLine, RiLoader4Line } from '@remixicon/react';
-import { FormEvent, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 
 const BasicForm = ({
     fieldsData,
     onSubmit,
     submitButtoneText,
+    setFieldsData,
 }: {
     fieldsData: InputGroupType[],
     submitButtoneText: {
@@ -18,6 +19,7 @@ const BasicForm = ({
         inprogress: string,
     }
     onSubmit: (event: FormEvent) => void | Promise<void>,
+    setFieldsData: Dispatch<SetStateAction<InputGroupType[]>>,
 }) => {
 
     const [inProgress, setInProgress] = useState<boolean>(false);
@@ -27,6 +29,30 @@ const BasicForm = ({
             className='min-w-[350px] space-y-5'
             onSubmit={async (event) => {
                 setInProgress(true);
+                event.preventDefault();
+
+                for (const field of fieldsData) {
+                    if (field.required && !field.value) {
+                        setFieldsData(prev => {
+                            const update: InputGroupType[] = prev.map((f) => {
+                                if (f.name === field.name) {
+                                    return ({
+                                        ...f,
+                                        invalid: true,
+                                    })
+                                } else {
+                                    return f;
+                                }
+                            })
+
+                            return update;
+                        })
+
+                        setInProgress(false);
+                        return;
+                    }
+                }
+
                 await onSubmit(event);
                 setInProgress(false);
             }}
@@ -79,6 +105,10 @@ function SingleInputField({ field }: {
                     aria-invalid={field.invalid}
                     type={fieldType}
                     className='autofill:bg-background autofill:text-foreground'
+                    onChange={(event) => {
+                        field.onChange(event)
+                    }}
+                    value={field.value}
                 />
                 {field.icon && (
                     <InputGroupAddon>

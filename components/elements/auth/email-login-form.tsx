@@ -2,7 +2,7 @@
 
 import { InputGroupType } from '@/types/input-group-type'
 import { RiAtLine, RiKeyLine } from '@remixicon/react'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import BasicForm from '../ui/basic-form'
 import { handleFormInputDirectOnChange } from '@/functions/form-handlers'
 import { UserLoginFormFieldTypes } from '@/types/user-login-types'
@@ -16,16 +16,17 @@ const EmailLoginForm = () => {
 
   const [fieldsData, setFieldsData] = useState<InputGroupType[]>([
     {
-      value: '',
+      value: formData["email"],
       onChange: handleInputChange,
       icon: RiAtLine,
       placeholder: "Email address",
       name: "email",
       invalid: false,
-      type: "text"
+      type: "text",
+      required: true,
     },
     {
-      value: '',
+      value: formData["password"],
       onChange: handleInputChange,
       icon: RiKeyLine,
       placeholder: "Password",
@@ -33,6 +34,7 @@ const EmailLoginForm = () => {
       invalid: false,
       isPassword: true,
       type: "password",
+      required: true,
     }
   ])
 
@@ -41,6 +43,16 @@ const EmailLoginForm = () => {
   ) {
     handleFormInputDirectOnChange(event, setFormData)
   }
+
+  useEffect(() => {
+    setFieldsData(prev => {
+      const updates: InputGroupType[] = prev.map((item) => ({
+        ...item,
+        value: formData[item.name as keyof typeof formData] || '',
+      }))
+      return updates;
+    })
+  }, [formData])
 
   return (
     <div
@@ -60,9 +72,10 @@ const EmailLoginForm = () => {
           inprogress: "Please wait",
           normal: "SignIn",
         }}
-        onSubmit={async () => {
+        onSubmit={async (event) => {
           await new Promise(resolve => setTimeout(resolve, 5000));
         }}
+        setFieldsData={setFieldsData}
       />
     </div>
   )
