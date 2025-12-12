@@ -10,12 +10,6 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json(orders);
     } catch (err) {
-        console.log("Router error");
-
-        if (err instanceof AxiosError) {
-            console.log(err.response?.data);
-        }
-
         const message = handleCatchBlock(err);
         return NextResponse.json(message, { status: 500 });
     }

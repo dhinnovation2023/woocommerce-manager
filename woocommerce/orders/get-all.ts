@@ -22,7 +22,6 @@ export async function getAllWcOrders(options: GetAllWcOrderRequestData) {
                     findQuery[key] = value;
                 }
             }
-            console.log(findQuery)
             
             const response = await woocommerceApi.get<WcOrdersInterface[]>('/orders', {
                 params: findQuery,
