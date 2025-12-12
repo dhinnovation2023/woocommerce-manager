@@ -1,6 +1,7 @@
 import EmailLoginForm from '@/components/elements/auth/email-login-form'
 import AuthLayout from '@/layouts/auth'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
 const EmailSigninPage = async () => {
     return (
@@ -19,7 +20,9 @@ const EmailSigninPage = async () => {
                 </p>
             }
         >
-            <EmailLoginForm/>
+            <Suspense>
+                <EmailLoginForm />
+            </Suspense>
         </AuthLayout>
     )
 }
