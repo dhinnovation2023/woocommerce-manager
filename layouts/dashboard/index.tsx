@@ -15,7 +15,7 @@ const DashboardLayout = ({
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
 
     useEffect(() => {
-        setIsSidebarOpen(!isMobile)
+        (() => setIsSidebarOpen(!isMobile))()
     }, [isMobile])
 
     return (
