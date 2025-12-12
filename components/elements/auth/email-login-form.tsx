@@ -6,7 +6,6 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import BasicForm from '../ui/basic-form'
 import { handleFormInputDirectOnChange } from '@/functions/form-handlers'
 import { UserLoginFormFieldTypes } from '@/types/user-login-types'
-import { handleCatchBlock } from '@/functions/error-handler';
 import { signIn } from "next-auth/react";
 import { useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';

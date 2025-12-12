@@ -33,6 +33,7 @@ export async function verifySuperAdmin(data: {
             }
 
         } catch (err) {
+            console.error(err);
             return resolve(null);
         }
     })

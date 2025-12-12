@@ -11,7 +11,7 @@ const UsersManagerPage = () => {
 
   const router = useRouter();
 
-  const [inProgress, setInProgress] = useState<boolean>(false);
+  const [inProgress] = useState<boolean>(false);
 
   return (
     <DashboardLayout
@@ -36,6 +36,7 @@ const UsersManagerPage = () => {
           [
             <div
               className='flex items-center gap-3'
+              key={"test-1"}
             >
               <div
                 className='w-8 h-8 shrink-0 bg-background-secondary shadow-sm flex items-center justify-center rounded-full'
@@ -56,7 +57,9 @@ const UsersManagerPage = () => {
             </div>,
             "Jogn David Paul",
             "12/12/2025",
-            <div>
+            <div
+              key={"test-2"}
+            >
               <Button
                 variant={"outline"}
               >Edit</Button>

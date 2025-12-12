@@ -32,7 +32,7 @@ const DashboardHeader = ({
                 console.error(message);
             }
         })()
-    }, [])
+    }, [dispatch, session])
 
     return (
         <div

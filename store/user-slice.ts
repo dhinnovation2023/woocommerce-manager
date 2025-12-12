@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Session, User } from 'next-auth';
+import { Session } from 'next-auth';
 
 const initialState: { session: Session | null } = { session: null }
 

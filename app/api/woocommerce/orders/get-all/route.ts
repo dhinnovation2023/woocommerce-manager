@@ -1,6 +1,5 @@
 import { handleCatchBlock } from "@/functions/error-handler";
 import { GetAllWcOrderRequestData, getAllWcOrders } from "@/woocommerce/orders/get-all";
-import { AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
