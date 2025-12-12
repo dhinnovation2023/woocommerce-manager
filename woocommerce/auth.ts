@@ -22,8 +22,8 @@ export function getWoocommerceApi() {
                     password: consumerSecret,
                 },
                 headers: {
-                    "User-Agent": "Mozilla/5.0",
-                    "Accept": "*/*"
+                    "User-Agent": "woocommercemanager/1.0",
+                    "Accept": "application/json"
                 }
             })
 
