@@ -27,6 +27,9 @@ const WoocommerceOrdersPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [status, setStatus] = useState<WcOrdersInterface["status"] | null>(null);
 
+  const [searchText, setSearchText] = useState<string>('');
+  const [deboundedSearchText, setDebouncedSearchText] = useState<string>('');
+
   useEffect(() => {
     (async () => {
       setInProgress(true);
@@ -36,6 +39,7 @@ const WoocommerceOrdersPage = () => {
           page: 1,
           per_page: perPage,
           status: status || undefined,
+          search: deboundedSearchText,
         }
 
         const {
@@ -52,7 +56,15 @@ const WoocommerceOrdersPage = () => {
 
       setInProgress(false);
     })()
-  }, [status, perPage])
+  }, [status, perPage, deboundedSearchText])
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedSearchText(searchText);
+    }, 1000)
+
+    return () => clearTimeout(timeout);
+  }, [searchText])
 
   async function handlePagination (action: 1 | -1) {
     setInProgress(true);
@@ -70,6 +82,7 @@ const WoocommerceOrdersPage = () => {
         page: nextPage,
         per_page: perPage,
         status: status || undefined,
+        search: searchText,
       }
 
       const response = await axios.post('/api/woocommerce/orders/get-all', requestData);
@@ -91,13 +104,17 @@ const WoocommerceOrdersPage = () => {
         className="flex items-center justify-between mb-6"
       >
         <div
-          className="w-[300px] bg-background rounded-lg"
+          className="w-75 bg-background rounded-lg"
         >
           <InputGroup
             className="w-full"
           >
             <InputGroupInput
-              placeholder="Search"
+              placeholder="Search Orders"
+              value={searchText}
+              onChange={(event) => {
+                setSearchText(event.target.value);
+              }}
             />
             <InputGroupAddon>
               <RiSearchLine
@@ -114,7 +131,7 @@ const WoocommerceOrdersPage = () => {
               setStatus(value === "all" ? undefined : value as WcOrdersInterface["status"])
             }}
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-45">
               <SelectValue placeholder="Select Status" />
             </SelectTrigger>
             <SelectContent>
