@@ -26,7 +26,7 @@ const BasicForm = ({
 
     return (
         <form
-            className='min-w-[350px] space-y-5'
+            className='min-w-87.5 space-y-5'
             onSubmit={async (event) => {
                 setInProgress(true);
                 event.preventDefault();

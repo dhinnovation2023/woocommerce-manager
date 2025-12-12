@@ -1,6 +1,6 @@
 'use client';
 
-import { breadcrumps, pageTitlesConfig } from '@/configs/page-titles'
+import { breadcrumps, pageTitlesConfig } from '@/config/page-titles'
 import { RiArrowRightSLine } from '@remixicon/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -25,7 +25,7 @@ const DashboardBreadcrumps = () => {
             <div
                 className='flex items-center gap-2'
             >
-                {breadcrumps[pathname].map((item, index) => (
+                {breadcrumps[pathname]?.map((item, index) => (
                     <Fragment
                         key={index}
                     >

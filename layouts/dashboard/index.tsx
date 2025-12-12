@@ -7,10 +7,17 @@ import DashboardBreadcrumps from './breadcrumps'
 import { AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ReduxProvider } from '@/providers/redux-provider';
+import { Button } from '@/components/ui/button';
 
 const DashboardLayout = ({
     children,
-}: PropsWithChildren) => {
+    initialActionBtns,
+}: PropsWithChildren<{
+    initialActionBtns?: {
+        label: string,
+        onClick: () => void,
+    }[]
+}>) => {
 
     const isMobile = useIsMobile();
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
@@ -43,6 +50,19 @@ const DashboardLayout = ({
                             className='max-w-277.5 mx-auto min-h-max'
                         >
                             <DashboardBreadcrumps />
+                            {initialActionBtns && (
+                                <div
+                                    className='mb-8 flex items-center gap-2'
+                                >
+                                    {initialActionBtns.map((action, index) => (
+                                        <Button
+                                            key={index}
+                                            onClick={action.onClick}
+                                            variant={"theme"}
+                                        >{action.label}</Button>
+                                    ))}
+                                </div>
+                            )}
                             {children}
                         </div>
                     </div>

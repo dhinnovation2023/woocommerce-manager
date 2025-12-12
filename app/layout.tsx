@@ -22,7 +22,7 @@ export default function RootLayout({
       >
         {children}
         <Toaster
-          position="top-center"
+          position="bottom-right"
         />
       </body>
     </html>

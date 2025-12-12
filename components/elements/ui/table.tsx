@@ -91,7 +91,7 @@ export function TableTemplate({
                                     onPerPageChange(perPage);
                                 }}
                             >
-                                <SelectTrigger className="w-[180px]">
+                                <SelectTrigger className="w-45">
                                     <SelectValue placeholder={`${perPage} Per Page`} />
                                 </SelectTrigger>
                                 <SelectContent>

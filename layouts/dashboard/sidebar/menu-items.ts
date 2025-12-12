@@ -1,4 +1,4 @@
-import { RemixiconComponentType, RiDashboardLine, RiStore2Line } from "@remixicon/react";
+import { RemixiconComponentType, RiDashboardLine, RiGroupLine, RiStore2Line } from "@remixicon/react";
 
 export interface DashboardSidebarMenuItemInterface {
     label: string,
@@ -23,6 +23,20 @@ const sidebarMenuItems: DashboardSidebarMenuItemInterface[] = [
             {
                 label: "Orders",
                 url: "/app/woocommerce/orders",
+            },
+        ],
+    },
+    {
+        label: "Users Manager",
+        icon: RiGroupLine,
+        submenu: [
+            {
+                label: "View Users",
+                url: "/app/users-manager",
+            },
+            {
+                label: "Add Users",
+                url: "/app/users-manager/add",
             },
         ]
     }
