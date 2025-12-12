@@ -6,8 +6,14 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import BasicForm from '../ui/basic-form'
 import { handleFormInputDirectOnChange } from '@/functions/form-handlers'
 import { UserLoginFormFieldTypes } from '@/types/user-login-types'
+import { handleCatchBlock } from '@/functions/error-handler';
+import { signIn } from "next-auth/react";
+import { useSearchParams } from 'next/navigation';
+import { toast } from 'sonner';
 
 const EmailLoginForm = () => {
+
+  const searchParams = useSearchParams();
 
   const [formData, setFormData] = useState<UserLoginFormFieldTypes>({
     email: '',
@@ -56,6 +62,21 @@ const EmailLoginForm = () => {
     })()
   }, [formData])
 
+  useEffect(() => {
+    (async () => {
+      const errorCode = searchParams.get("error");
+      if (errorCode) {
+        if (errorCode === "CredentialsSignin") {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          const test = toast.error("Incorrect email or password.")
+          console.log(test)
+        } else {
+          toast.error(errorCode);
+        }
+      }
+    })()
+  }, [searchParams])
+
   return (
     <div
       className='space-y-7'
@@ -75,7 +96,13 @@ const EmailLoginForm = () => {
           normal: "SignIn",
         }}
         onSubmit={async () => {
-          await new Promise(resolve => setTimeout(resolve, 5000));
+
+          const callbackUrl = searchParams.get("callbackUrl");
+
+          await signIn("credentials", {
+            ...formData,
+            callbackUrl: callbackUrl || '/app'
+          });
         }}
         setFieldsData={setFieldsData}
       />

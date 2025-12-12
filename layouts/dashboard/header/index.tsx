@@ -1,6 +1,11 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 import HeaderGlobalSearch from './search'
 import { RiAccountCircleLine, RiMenuUnfold3Line, RiMenuUnfold4Line, RiNotification4Line } from '@remixicon/react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/store/store'
+import { handleCatchBlock } from '@/functions/error-handler'
+import { getSession } from 'next-auth/react'
+import { initialize } from '@/store/user-slice'
 
 const DashboardHeader = ({
     isSidebarOpen,
@@ -9,6 +14,26 @@ const DashboardHeader = ({
     isSidebarOpen: boolean,
     setIsSidebarOpen: Dispatch<SetStateAction<boolean>>,
 }) => {
+
+    const session = useSelector((state: RootState) => state.userSlice.session);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        (async () => {
+            try {
+                if (!session) {
+                    const userSession = await getSession();
+                    if (userSession?.user) {
+                        dispatch(initialize(userSession))
+                    }
+                }
+            } catch (err) {
+                const message = handleCatchBlock(err);
+                console.error(message);
+            }
+        })()
+    }, [])
+
     return (
         <div
             className='bg-background border-b border-stroke-light py-3 px-6 absolute top-0 left-0 w-full min-h-16.25 flex items-center'
@@ -35,7 +60,7 @@ const DashboardHeader = ({
                     </button>
                     <h2
                         className='text-xl font-extrabold shrink-0'
-                    >Howdy, John &#128075;</h2>
+                    >Howdy, {session?.user?.name} &#128075;</h2>
                 </div>
 
                 <div

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Etihadsouq eCommerce Manager",
@@ -20,6 +21,9 @@ export default function RootLayout({
         className={`${dm_sans.className} antialiased`}
       >
         {children}
+        <Toaster
+          position="top-center"
+        />
       </body>
     </html>
   );

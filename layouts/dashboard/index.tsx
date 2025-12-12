@@ -6,6 +6,7 @@ import DashboardSidebar from './sidebar'
 import DashboardBreadcrumps from './breadcrumps'
 import { AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { ReduxProvider } from '@/providers/redux-provider';
 
 const DashboardLayout = ({
     children,
@@ -19,33 +20,35 @@ const DashboardLayout = ({
     }, [isMobile])
 
     return (
-        <div
-            className='min-h-dvh w-full bg-background-secondary flex flex-col'
-        >
-            <DashboardHeader
-                isSidebarOpen={isSidebarOpen}
-                setIsSidebarOpen={setIsSidebarOpen}
-            />
+        <ReduxProvider>
             <div
-                className='h-dvh pt-16.25 flex items-stretch'
+                className='min-h-dvh w-full bg-background-secondary flex flex-col'
             >
-                <AnimatePresence>
-                    {isSidebarOpen && (
-                        <DashboardSidebar />
-                    )}
-                </AnimatePresence>
+                <DashboardHeader
+                    isSidebarOpen={isSidebarOpen}
+                    setIsSidebarOpen={setIsSidebarOpen}
+                />
                 <div
-                    className='w-full max-h-full overflow-x-hidden overflow-y-auto py-8 px-5'
+                    className='h-dvh pt-16.25 flex items-stretch'
                 >
+                    <AnimatePresence>
+                        {isSidebarOpen && (
+                            <DashboardSidebar />
+                        )}
+                    </AnimatePresence>
                     <div
-                        className='max-w-277.5 mx-auto min-h-max'
+                        className='w-full max-h-full overflow-x-hidden overflow-y-auto py-8 px-5'
                     >
-                        <DashboardBreadcrumps/>
-                        {children}
+                        <div
+                            className='max-w-277.5 mx-auto min-h-max'
+                        >
+                            <DashboardBreadcrumps />
+                            {children}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </ReduxProvider>
     )
 }
 
