@@ -12,14 +12,14 @@ const DashboardBreadcrumps = () => {
 
     return (
         <div
-            className='mb-10 flex items-center gap-4'
+            className='mb-10 flex flex-col md:flex-row md:items-center gap-1 md:gap-4'
         >
             <p
                 className='min-w-max text-xl font-semibold'
             >{pageTitlesConfig[pathname]}</p>
 
             <div
-                className='h-[15px] w-0.5 bg-foreground/30'
+                className='h-3.75 w-0.5 bg-foreground/30 hidden md:block'
             />
 
             <div

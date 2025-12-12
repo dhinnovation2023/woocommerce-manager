@@ -12,10 +12,10 @@ const AuthLayout = async ({
 }>) => {
     return (
         <div
-            className='min-h-dvh w-full flex items-stretch'
+            className='min-h-dvh w-full flex flex-col md:flex-row items-stretch justify-between'
         >
             <div
-                className='w-full'
+                className='w-full py-8 px-5'
             >
                 <div
                     className='flex items-center w-full h-full flex-col justify-center'
@@ -24,13 +24,13 @@ const AuthLayout = async ({
                 </div>
             </div>
             <div
-                className='w-full bg-theme-primary/10'
+                className='w-full bg-theme-primary/10 py-8 px-5'
             >
                 <div
-                    className='max-w-[400px] mx-auto min-h-full flex flex-col justify-center gap-5'
+                    className='max-w-100 mx-auto min-h-full flex flex-col justify-center gap-5'
                 >
                     <h1
-                        className='text-5xl font-bold leading-[62px]'
+                        className='text-5xl font-bold leading-15.5'
                     >{heading}</h1>
                     <p>{content}</p>
                     {afterContent}

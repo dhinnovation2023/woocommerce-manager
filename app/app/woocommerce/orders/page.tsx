@@ -101,7 +101,7 @@ const WoocommerceOrdersPage = () => {
     <DashboardLayout>
 
       <div
-        className="flex items-center justify-between mb-6"
+        className="flex flex-col md:flex-row gap-2 items-center justify-between mb-6"
       >
         <div
           className="w-75 bg-background rounded-lg"

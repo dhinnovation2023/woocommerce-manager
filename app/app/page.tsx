@@ -1,7 +1,6 @@
 import DashboardLayout from '@/layouts/dashboard'
 import { RemixiconComponentType, RiSurveyLine } from '@remixicon/react'
 import Link from 'next/link'
-import React from 'react'
 
 interface DashboardGridItemsDataInterface {
   heading: string,
@@ -50,7 +49,7 @@ const DashboardPage = () => {
             className='mb-6 text-foreground-secondary'
           >{content.description}</p>
           <div
-            className='grid grid-cols-4 gap-3'
+            className='grid grid-cols-1 md:grid-cols-4 gap-3'
           >
             {content.items.map((item, index) => (
               <div
